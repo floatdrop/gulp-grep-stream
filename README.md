@@ -1,39 +1,58 @@
-(PLUGIN AUTHOR: Please read [Plugin README conventions](https://github.com/wearefractal/gulp/wiki/Plugin-README-Conventions), then delete this line)
-
 # gulp-grep [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Coveralls Status][coveralls-image]][coveralls-url] [![Dependency Status][depstat-image]][depstat-url]
 
 > grep plugin for [gulp](https://github.com/wearefractal/gulp)
 
+This is alter version of `[gulp-ignore]`(https://github.com/robrich/gulp-ignore), if you want to ignore files from stream - you should definatly check it out first.
+
 ## Usage
 
-First, install `gulp-grep` as a development dependency:
-
-```shell
-npm install --save-dev gulp-grep
-```
-
-Then, add it to your `gulpfile.js`:
+### Basic
 
 ```javascript
-var grep = require("gulp-grep");
+var grep = require('gulp-grep');
 
-gulp.src("./src/*.ext")
-	.pipe(grep({
-		msg: "Hello Gulp!"
-	}))
-	.pipe(gulp.dest("./dist"));
+gulp.src(['./src/*.ext'])
+    .pipe(grep('*magic*.ext'))
+    .pipe(gulp.dest("./dist/magic"));
+```
+
+#### Invert match
+
+```javascript
+var grep = require('gulp-grep');
+
+gulp.src(['./src/*.ext'])
+    .pipe(grep('*magic*.ext', { invert_match: true }))
+    .pipe(gulp.dest("./dist/not_magic"));
+```
+
+### Running changed mocha test files
+
+```javascript
+var grep = require('gulp-grep');
+var watch = require('gulp-watch');
+var mocha = require('gulp-mocha');
+
+gulp.src(['./lib/**/*.js', './tests/*.js'])
+    .pipe(watch({ emit: glob }))
+    .pipe(grep('tests/*.js'))
+    .pipe(mocha());
 ```
 
 ## API
 
-### grep(options)
+### grep(pattern, options)
 
-#### options.msg
-Type: `String`  
-Default: `Hello World`
+#### pattern
+Type: `String` / `Array`
 
-The message you wish to attach to file.
+The array of patterns, that will be used for matching. (If `string` passed, it will be wrapped in array).
 
+#### options.invert_match
+Type: `Boolean`
+Default: `false`
+
+If file matches one of patterns, it will be excluded from stream.
 
 ## License
 

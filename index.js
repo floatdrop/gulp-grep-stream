@@ -1,34 +1,23 @@
-var through = require('through');
+'use strict';
 
-module.exports = function (param) {
-    'use strict';
+var through = require('through'),
+    gutil = require('gulp-util');
 
-    function grep(file, callback) {
+module.exports = function (pattern, options) {
 
-        // if necessary check for required param(s), e.g. options hash, etc.
-        if (!param) {
-            callback(new Error('gulp-grep: No param supplied'), undefined);
-        }
+    if (!pattern) {
+        throw new gutil.PluginError('gulp-grep-stream', 'Patterns was not specified');
+    }
 
-        // check if file.contents is a `Buffer`
+    function grep_stream(file, callback) {
+
         if (file.contents instanceof Buffer) {
-
-            // manipulate buffer in some way
-            // http://nodejs.org/api/buffer.html
             file.contents = new Buffer(String(file.contents) + '\n' + param);
-
             callback(null, file);
-
-        } else { // assume it is a `stream.Readable`
-
-            // http://nodejs.org/api/stream.html
-            // http://nodejs.org/api/child_process.html
-            // https://github.com/dominictarr/event-stream
-
-            // accepting streams is optional
-            callback(new Error('gulp-grep: streams not supported'), undefined);
+        } else {
+            callback(new Error('gulp-grep-stream: streams not supported'), undefined);
         }
     }
 
-    return through(grep);
+    return through(grep_stream);
 };

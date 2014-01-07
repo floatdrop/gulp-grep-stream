@@ -1,12 +1,17 @@
 
 {
-  "name": "gulp-grep",
+  "name": "gulp-grep-stream",
   "version": "0.0.0",
-  "description": "A plugin for Gulp",
+  "description": "A gulp file stream filtering plugin for Gulp",
   "keywords": [
-    "gulpplugin"
+    "gulpplugin",
+    "grep",
+    "filter",
+    "ignore",
+    "include",
+    "exclude"
   ],
-  "homepage": "https://github.com/floatdrop/gulp-grep",
+  "homepage": "https://github.com/floatdrop/gulp-grep-stream",
   "bugs": "https://github.com/floatdrop/gulp-grep/issues",
   "author": {
     "name": "Vsevolod Strukchinsky",
@@ -16,7 +21,7 @@
   "main": "./index.js",
   "repository": {
     "type": "git",
-    "url": "git://github.com/floatdrop/gulp-grep.git"
+    "url": "git://github.com/floatdrop/gulp-grep-stream.git"
   },
   "scripts": {
     "test": "istanbul test _mocha --report html -- test/*.js --reporter spec",

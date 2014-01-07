@@ -4,6 +4,6 @@
 delete require.cache[require.resolve('../')];
 var grep = require('../');
 
-describe('gulp-grep', function () {
+describe('gulp-grep-stream', function () {
 
 });

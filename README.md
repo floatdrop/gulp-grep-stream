@@ -27,19 +27,6 @@ gulp.src(['./src/*.ext'])
     .pipe(gulp.dest("./dist/not_magic"));
 ```
 
-### Running changed mocha test files
-
-```javascript
-var grep = require('gulp-grep-stream');
-var watch = require('gulp-watch');
-var mocha = require('gulp-mocha');
-
-gulp.src(['./lib/**/*.js', './tests/*.js'])
-    .pipe(watch({ emit: 'all' }))
-    .pipe(grep('./tests/*.js'))
-    .pipe(mocha());
-```
-
 ## API
 
 ### grep(pattern, options)

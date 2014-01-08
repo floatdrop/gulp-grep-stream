@@ -35,8 +35,8 @@ var watch = require('gulp-watch');
 var mocha = require('gulp-mocha');
 
 gulp.src(['./lib/**/*.js', './tests/*.js'])
-    .pipe(watch({ emit: 'glob' }))
-    .pipe(grep('tests/*.js'))
+    .pipe(watch({ emit: 'all' }))
+    .pipe(grep('./tests/*.js'))
     .pipe(mocha());
 ```
 

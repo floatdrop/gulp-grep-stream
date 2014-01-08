@@ -9,15 +9,6 @@ var grep = require('../'),
     path = require('path'),
     should = require('chai').should();
 
-function asset(name) {
-    return require(path.join(__dirname, 'fixtures', name))
-        .map(function (p) { return { path: p }; });
-}
-
-function toExpected(array) {
-    return array.map(function (f) { return f.path; });
-}
-
 describe('grep stream', function () {
     describe('options', function () {
         it('should throw, when pattern is missing', function () {
@@ -47,24 +38,37 @@ describe('grep stream', function () {
             '/another/some/path/a.txt'
         ];
         var gs = grep('**/a.txt');
-        readArray(asset('text-files'))
-            .pipe(gs)
-            .pipe(toArray(function (err, actual) {
-                should.not.exist(err);
-                toExpected(actual).should.be.deep.equal(expected);
-                done();
-            }));
+        check(gs, 'text-files', expected, done);
     });
 
     it('should exclude files by pattern with invertMatch option', function (done) {
         var expected = [ '/home/with/b.txt' ];
         var gs = grep('**/a.txt', { invertMatch: true });
-        readArray(asset('text-files'))
+        check(gs, 'text-files', expected, done);
+    });
+
+    it('should support function as pattern', function (done) {
+        var expected = [ '/another/some/path/a.txt' ];
+        var gs = grep(function (f) { return (/another/g).test(f.path); });
+        check(gs, 'text-files', expected, done);
+    });
+
+    function readAsset(name) {
+        return require(path.join(__dirname, 'fixtures', name))
+            .map(function (p) { return { path: p }; });
+    }
+
+    function toExpected(array) {
+        return array.map(function (f) { return f.path; });
+    }
+
+    function check(gs, asset, expected, done) {
+        readArray(readAsset(asset))
             .pipe(gs)
             .pipe(toArray(function (err, actual) {
                 should.not.exist(err);
                 toExpected(actual).should.be.deep.equal(expected);
                 done();
             }));
-    });
+    }
 });

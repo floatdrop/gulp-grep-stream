@@ -35,7 +35,7 @@
     "coveralls": "*",
     "mocha-lcov-reporter": "*",
     "istanbul": "*",
-    "event-stream": "*",
+    "event-stream": "~3.0.20",
     "gulp-mocha": "*",
     "gulp-watch": "*",
     "chai": "*",

@@ -45,11 +45,15 @@ gulp.src(['./lib/**/*.js', './tests/*.js'])
 ### grep(pattern, options)
 
 #### pattern
-Type: `String` / `Array`
+Type: `String` / `Array` / `Function`
 
-The array of patterns, that will be used for matching. (If `string` passed, it will be wrapped in array).
+Patterns for using in minimatch.
 
-#### options.invert_match
+ * `String` pattern
+ * `Array` of patterns
+ * `Function` returning `boolean` to determine grep file or not
+
+#### options.invertMatch
 Type: `Boolean`
 Default: `false`
 

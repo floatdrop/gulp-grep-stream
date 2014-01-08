@@ -1,4 +1,3 @@
-
 {
   "name": "gulp-grep-stream",
   "version": "0.0.0",
@@ -28,7 +27,8 @@
     "coveralls": "istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage"
   },
   "dependencies": {
-    "through": "*"
+    "through": "*",
+    "minimatch": "~0.2.14"
   },
   "devDependencies": {
     "mocha": "*",

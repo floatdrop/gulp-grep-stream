@@ -1,23 +1,40 @@
 'use strict';
 
 var through = require('through'),
-    gutil = require('gulp-util');
+    gutil = require('gulp-util'),
+    minimatch = require('minimatch');
 
-module.exports = function (pattern, options) {
+module.exports = function (pattern, opt) {
 
-    if (!pattern) {
-        throw new gutil.PluginError('gulp-grep-stream', 'Patterns was not specified');
+    opt = opt || {};
+
+    if (typeof pattern === 'string' ||
+        pattern instanceof String) {
+        opt.pattern = [ pattern ];
     }
 
-    function grep_stream(file, callback) {
+    if (typeof pattern === 'function') {
+        opt.pattern = pattern;
+    }
 
-        if (file.contents instanceof Buffer) {
-            file.contents = new Buffer(String(file.contents) + '\n' + param);
-            callback(null, file);
+    if (!opt.pattern) {
+        throw new gutil.PluginError('gulp-grep-stream',
+            'Pattern is not a string, function or array');
+    }
+
+    function grepStream(file) {
+        var grep;
+
+        if (typeof opt.pattern === 'function') {
+            grep = opt.pattern(file);
         } else {
-            callback(new Error('gulp-grep-stream: streams not supported'), undefined);
+            grep = minimatch(opt.pattern);
+        }
+
+        if ((!!opt.invertMatch) ^ grep) {
+            this.queue(file);
         }
     }
 
-    return through(grep_stream);
+    return through(grepStream);
 };

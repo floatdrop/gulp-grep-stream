@@ -3,7 +3,7 @@
 
 > Stream grep plugin for [gulp](https://github.com/wearefractal/gulp)
 
-This is alter version of [`gulp-ignore`](https://github.com/robrich/gulp-ignore), if you want to ignore files from stream - you should definatly check it out first.
+This is grep for stream. It allows to include/exclude files from stream by patterns or custom `function`.
 
 ## Usage
 

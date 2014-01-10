@@ -60,4 +60,4 @@ If file matches one of patterns, it will be excluded from stream.
 [coveralls-image]: https://coveralls.io/repos/floatdrop/gulp-grep-stream/badge.png
 
 [depstat-url]: https://david-dm.org/floatdrop/gulp-grep-stream
-[depstat-image]: https://david-dm.org/floatdrop/gulp-grep-stream.png
+[depstat-image]: https://david-dm.org/floatdrop/gulp-grep-stream.png?theme=shields.io

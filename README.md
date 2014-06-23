@@ -23,7 +23,7 @@ __Invert match__
 var grep = require('gulp-grep-stream');
 
 gulp.src(['./src/*.ext'])
-    .pipe(grep('*magic*.ext', { invert_match: true }))
+    .pipe(grep('*magic*.ext', { invertMatch: true }))
     .pipe(gulp.dest("./dist/not_magic"));
 ```
 

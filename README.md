@@ -3,6 +3,8 @@
 
 > Stream grep plugin for [gulp](https://github.com/wearefractal/gulp)
 
+Plugin is not maintaned. Please see [`gulp-filter`](https://github.com/sindresorhus/gulp-filter) as an alternative.
+
 This is grep for stream. It allows to include/exclude files from stream by patterns or custom `function`.
 
 ## Usage
